@@ -15,7 +15,7 @@ node('master') {
     }
     stage('DeployTo Kubernetes Cluster') {
         sh'''sed -i "15d" p-backend-deployment.yml'''
-        sh'''sed -i "14 a \'\\'          image: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:${BUILD_NUMBER}" backend-deployment.yml && sed -i "s/''//" p-backend-deployment.yml'''
+        sh'''sed -i "14 a \'\\'          image: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:${BUILD_NUMBER}" p-backend-deployment.yml && sed -i "s/''//" p-backend-deployment.yml'''
         sh 'kubectl apply -f p-backend-deployment.yml'
    }
     stage('Remove Docker Image') {
